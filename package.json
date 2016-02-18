@@ -1,0 +1,14 @@
+{
+  "name": "FileEncryptor",
+  "version": "0.1.0",
+  "author": "Guillermo Blanco",
+  "main": "main.js",
+  "dependencies": {
+    "file-encryptor": "^0.1.0",
+    "archiver": "*",
+    "prompt": "*",
+    "commander": "*",
+    "async": "*",
+    "upath": "*"
+  }
+}
