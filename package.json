@@ -1,15 +1,28 @@
 {
-  "name": "FileEncryptor",
+  "name": "fileCypher",
   "version": "0.1.0",
   "author": "Guillermo Blanco",
-  "main": "./main.js",
+  "main": "./cypher.js",
+  "bin": "./bin/cypher",
+  "license": "MIT",
+  "homepage": "https://github.com/m0n0l0c0/FileCypher#readme",
+  "bugs": {
+    "url": "https://github.com/m0n0l0c0/FileCypher/issues"
+  },
+  "scripts": {
+    "prepublish": "npm test",
+    "test": "standard"
+  },
   "dependencies": {
-    "file-encryptor": "^0.1.0",
-    "fs-extra": "*",
-    "adm-zip": "*",
-    "prompt": "*",
-    "commander": "*",
-    "async": "*",
-    "upath": "*"
+    "archiver": "^1.1.0",
+    "async": "^2.0.1",
+    "commander": "^2.9.0",
+    "file-encryptor": "^0.1.1",
+    "fs-extra": "^0.30.0",
+    "prompt": "^1.0.0",
+    "upath": "^0.2.0"
+  },
+  "devDependencies": {
+    "standard": "^8.0.0"
   }
 }
