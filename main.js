@@ -211,7 +211,7 @@ async.waterfall([
 
     // If we were asked to clean...
     if (task.clean) {
-      cleanFiles = cleanFiles.concat(files)
+      cleanFiles = cleanFiles.concat(files.map(f => f.path))
     }
 
     logger.log('Cleaning...')
