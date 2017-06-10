@@ -1,13 +1,13 @@
 'use strict'
 
-let fs = require('fs')
-let program = require('commander')
-let { resolve } = require('upath')
+const program = require('commander')
+const { resolve, joinSafe } = require('upath')
+const { existsSync } = require('fs')
 
 function parse (argv) {
   // Parse command line
   program
-    .version('0.0.2')
+    .version('0.2.0')
     .option('-e, -E, --encrypt', 'Encrypt the file/directory', /^(e)$/i)
     .option('-d, -D, --decrypt', 'Decrypt the file/directory', /^(d)$/i)
     .option('-c, -C, --clean', 'Whether to delete the original file/directory or not (defaults to false)', /^(c)$/i)
@@ -20,14 +20,19 @@ function parse (argv) {
   //  - there is no input file OR
   //  - we are given encrypt AND decrypt options(no possible choice) OR
   //  - we are given no encrypt nor decrypt options(no possible choice)
-  let files = (program.file || []).concat(program.args.map(validate).filter(v => !!v))
-  let task = { encrypt: !!program.E, decrypt: !!program.D, clean: !!program.C }
+  const files = (program.file || []).concat(program.args.map(validate).filter(v => !!v))
+  const task = { encrypt: !!program.E, decrypt: !!program.D, clean: !!program.C }
 
-  return { files, output: program.out, task, verbose: !!program.verbose }
+  return {
+    files: files,
+    output: program.out[ 0 ] || joinSafe(process.cwd() + '/data'),
+    task: task,
+    verbose: !!program.verbose
+  }
 }
 
 function validate (mod) {
-  if (fs.existsSync(mod)) {
+  if (existsSync(mod)) {
     return resolve(mod)
   } else {
     return null
@@ -42,10 +47,10 @@ function modules (mod, memo) {
 }
 
 function enoentModules (mod, memo) {
-  if (!fs.existsSync(mod) && fs.existsSync(resolve(mod, '../'))) {
+  if (!existsSync(mod) && existsSync(resolve(mod, '../'))) {
     memo.push(resolve(mod))
   }
   return memo
 }
 
-module.exports = { parse, help: program.help.bind(program) }
+module.exports = { parse: parse, help: program.help.bind(program) }
