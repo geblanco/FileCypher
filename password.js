@@ -5,7 +5,7 @@ const prompt = require('prompt')
 module.exports = (msg, callback) => {
   if (!callback && typeof msg === 'function') {
     callback = msg
-    msg = ''
+    msg = 'password'
   }
   prompt.message = msg
   prompt.start()

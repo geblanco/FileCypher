@@ -34,7 +34,8 @@ function addEntry (archiver, source) {
     if (stat.isDirectory()) {
       archiver.directory(source, basename(source))
     } else {
-      archiver.append(createReadStream(source))
+      // console.log('append...', createReadStream(source), source)
+      archiver.file(source)
     }
   }
 }

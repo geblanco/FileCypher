@@ -35,7 +35,7 @@ const tasks = {
 
         encryptFile(tmpDir, output, password, callback)
       })
-      console.log('Encrypting files...')
+      console.log('Encrypting files...', files, tmpDir)
       files.forEach(archive.addEntry)
       archive.finalize()
     })
