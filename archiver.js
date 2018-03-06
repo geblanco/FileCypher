@@ -32,10 +32,11 @@ function addEntry (archiver, source) {
   const stat = lstatSync(source)
   if (stat) {
     if (stat.isDirectory()) {
+      // console.log('append...', source, basename(source))
       archiver.directory(source, basename(source))
     } else {
-      // console.log('append...', createReadStream(source), source)
-      archiver.file(source)
+      // console.log('append...', basename(source))
+      archiver.file(basename(source))
     }
   }
 }

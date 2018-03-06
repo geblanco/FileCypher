@@ -1,3 +1,4 @@
 #! /usr/bin/env node
+const { joinSafe, resolve } = require('upath')
 
-require('../main.js')
+require(joinSafe(resolve('..'), 'main.js'))
